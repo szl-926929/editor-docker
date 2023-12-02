@@ -1,0 +1,39 @@
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.config/zsh/ohmyzsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="agnoster"
+
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
+prompt_context() {}
+
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
+# mason安装的二进制目录
+export PATH=$PATH:/root/.local/share/nvim/mason/bin
+export GOBIN=$GOROOT/bin
+go env -w GO111MODULE=on
+# 设置go get代理
+# go env -w GOPROXY=https://goproxy.cn,direct
+export GOPROXY=https://goproxy.cn,direct
+# 设置公司gitlab上私有项目不走prox
+export GOPRIVATE=code.devops.xiaohongshu.com
+
+alias tmux='tmux -u'
+
