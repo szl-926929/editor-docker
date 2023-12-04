@@ -41,8 +41,12 @@ RUN apk add -U --no-cache gcc clang clang-dev alpine-sdk cmake ccache bear\
 #	&& rm -rf JetBrainsMono
 
 
-RUN chmod +x ./files/install.sh \
-    && ./files/install.sh
+RUN chmod +x ./files/install_golang.sh \
+    && ./files/install_golang.sh \
+	&& chmod +x ./files/install_lua.sh \
+	&& ./files/install_lua.sh \
+	&& chmod +x ./files/install_editor.sh \
+	&& ./files/install_editor.sh
 
 
 RUN curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | zsh || true \
@@ -50,10 +54,9 @@ RUN curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.s
 	&& apk add -U --no-cache zsh-syntax-highlighting zsh-vcs \
     && sed -i 's/\/bin\/ash/\/bin\/zsh/g' /etc/passwd \
 	&& /bin/zsh -c "source /etc/profile" \
-	&& /bin/zsh -c "source ~/.zshrc"
+	&& /bin/zsh -c "source ~/.zshrc" \
+	&& cp ./files/tmux.conf /root/.tmux.conf
 
 
-RUN git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
-
-CMD ["./files/ping"]
+CMD ["/usr/local/go/bin/go", "run", "/root/files/daemon/main.go"]
 
