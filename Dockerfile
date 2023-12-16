@@ -45,8 +45,8 @@ RUN chmod +x ./files/install_golang.sh \
     && ./files/install_golang.sh \
 	&& chmod +x ./files/install_lua.sh \
 	&& ./files/install_lua.sh \
-	&& chmod +x ./files/install_editor.sh \
-	&& ./files/install_editor.sh
+	&& chmod +x ./files/git.sh \
+	&& ./files/git.sh
 
 
 RUN curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | zsh || true \
